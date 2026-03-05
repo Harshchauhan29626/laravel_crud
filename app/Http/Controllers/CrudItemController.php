@@ -9,25 +9,11 @@ use Illuminate\View\View;
 
 class CrudItemController extends Controller
 {
-    public function index(Request $request): View
+    public function index(): View
     {
-        $search = $request->string('search')->toString();
-        $status = $request->string('status')->toString();
+        $crudItems = CrudItem::latest()->paginate(10);
 
-        $crudItems = CrudItem::query()
-            ->when($search, function ($query, $searchTerm) {
-                $query->where(function ($searchQuery) use ($searchTerm) {
-                    $searchQuery->where('title', 'like', "%{$searchTerm}%")
-                        ->orWhere('category', 'like', "%{$searchTerm}%")
-                        ->orWhere('notes', 'like', "%{$searchTerm}%");
-                });
-            })
-            ->when(in_array($status, ['active', 'inactive'], true), fn ($query) => $query->where('status', $status))
-            ->latest()
-            ->paginate(10)
-            ->withQueryString();
-
-        return view('crud-items.index', compact('crudItems', 'search', 'status'));
+        return view('crud-items.index', compact('crudItems'));
     }
 
     public function create(): View

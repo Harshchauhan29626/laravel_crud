@@ -12,22 +12,6 @@
                 <a href="{{ route('crud-items.create') }}" class="btn btn-primary">Create</a>
             </div>
 
-            <form method="GET" action="{{ route('crud-items.index') }}" class="row g-2 mb-4">
-                <div class="col-12 col-md-6">
-                    <input type="text" name="search" class="form-control" placeholder="Search title/category/notes"
-                        value="{{ $search }}">
-                </div>
-                <div class="col-6 col-md-3">
-                    <select name="status" class="form-select">
-                        <option value="">All Statuses</option>
-                        <option value="active" @selected($status === 'active')>Active</option>
-                        <option value="inactive" @selected($status === 'inactive')>Inactive</option>
-                    </select>
-                </div>
-                <div class="col-6 col-md-3 d-grid">
-                    <button type="submit" class="btn btn-outline-secondary">Filter</button>
-                </div>
-            </form>
 
             <div class="table-responsive">
                 <table class="table table-striped align-middle mb-0">

@@ -9,6 +9,8 @@ class CrudItem extends Model
 {
     use HasFactory;
 
+    protected $table = 'crud_items';
+
     protected $fillable = [
         'title',
         'category',
